@@ -77,6 +77,11 @@ def start_recording(options):
     channels = options.get('numChannels', 1)
     bps = options.get('bps', 16) // 8
     print("sample rate: ", fs)
+
+    files = os.listdir(os.path.join(BASE_DIR, "static/_files/"))
+    for file in files:
+        if file.endswith(".wav"):
+            os.remove(os.path.join(BASE_DIR,'static/_files/', file))
     # session['wavefile'] = wf
 
 
@@ -117,8 +122,12 @@ def write_audio(data):
 def end_recording():
     """Stop recording audio from the client."""
     # print("saving file")
-    for file in os.listdir(os.path.join(BASE_DIR, "static/_files/")):
-        emit('add-wavefile', url_for('static', filename='_files/' + file))
+    files = os.listdir(os.path.join(BASE_DIR, "static/_files/"))
+    files.sort()
+    print(files)
+    for file in files:
+        if file.endswith(".wav"):
+            emit('add-wavefile', url_for('static', filename='_files/' + file))
     # session['wavefile'].close()
     del session['audiobuffer']
     del session['wavename']
