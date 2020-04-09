@@ -19,6 +19,7 @@ fs = 44100 # sampling rate for mic
 chunk_samples = int(fs * chunk_duration) # Each read length in number of samples.
 
 # Each model input data duration in seconds, need to be an integer numbers of chunk_duration
+BASE_DIR = os.getcwd()
 feed_duration = 10
 feed_samples = int(fs * feed_duration)
 data = 0
@@ -116,7 +117,8 @@ def write_audio(data):
 def end_recording():
     """Stop recording audio from the client."""
     # print("saving file")
-    # emit('add-wavefile', url_for('static', filename='_files/' + session['wavename']))
+    for file in os.listdir(os.path.join(BASE_DIR, "static/_files/")):
+        emit('add-wavefile', url_for('static', filename='_files/' + file))
     # session['wavefile'].close()
     del session['audiobuffer']
     del session['wavename']
