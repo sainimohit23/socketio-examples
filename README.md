@@ -1,6 +1,6 @@
 # Socket.IO Example
 
-This repository contains an example to demonstrate the real time audio streaming functionality using socketIO. The program uses client's browser to access the mic. The audio is streamed to the remote flask server. As of now the server saves the fixed length audio from the stream on the disk. The saved audios have some overlap between them. 
+This repository contains an example to demonstrate the real time audio streaming functionality using socketIO. The program uses client's browser to access the mic. The audio is streamed to the remote flask server. As of now the server receives the stream and saves its overlapping chunks on disk in real time. These chunks can be passed to machine learning models to get real time predictions on audio stream.
 
 ## How to Run
 
